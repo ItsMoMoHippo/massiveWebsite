@@ -1,3 +1,5 @@
-module github.com/ItsMoMoHippo/massiveWebsite
+module maWeb
 
-go 1.23.6
+go 1.24.2
+
+require github.com/lib/pq v1.10.9 // indirect
