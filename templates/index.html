@@ -10,12 +10,11 @@
     <header class="mb-6">
       <h1>{{ .Header }}</h1>
     </header>
-    <ul id="times">
-      {{- range .Times}}
-      <li>{{ . }}</li>
-      {{- else }}
-      <li><em>No times set yet</em></li>
-      {{- end }}
-    </ul>
+    <button hx-get="/wharswap" hx-target="#message" hx-swap="outerHTML">
+      swap message button
+    </button>
+    <div id="message">
+      <p>{{ .Message }}</p>
+    </div>
   </body>
 </html>
