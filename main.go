@@ -13,6 +13,8 @@ import (
 func main() {
 	http.HandleFunc("/", handler.HomePage)
 	http.HandleFunc("/wharswap", handler.WharPage)
+	http.HandleFunc("/setClubFoo", handler.SetClubFoo)
+	http.HandleFunc("/changeTimes", handler.DifferentList)
 
 	fmt.Println("Starting sevrer on :8080...")
 	http.ListenAndServe(":8080", nil)

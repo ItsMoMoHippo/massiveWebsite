@@ -12,6 +12,7 @@ func HomePage(w http.ResponseWriter, r *http.Request) {
 		Title:   "MA Website",
 		Header:  "Welcome from Go",
 		Message: ":michiraisedeyebrows:",
+		Times:   []string{"00:00", "00:01", "00:02"},
 	}
 	tmpl.Execute(w, data)
 }
