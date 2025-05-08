@@ -6,12 +6,10 @@ Just simply build and run the executable
 ```bash
 go build .
 ./main.exe
-
 ```
 or 
 ```bash
 go run .
-
 ```
 (bottom option compiles and runs in one step)
 
@@ -21,9 +19,9 @@ The program needs to have the database credentials stored properly within the pr
 ### Progress
 - [x] static webpage
 - [x] go templates to inject information into a HTML page
-- [-] connecting to the database
-- [-] using HTMX to easily switch out contents in the HTML
-- [-] TailwindCSS for looks
-- [-] :momo:
-- [-] maybe a little JS/web Components for little effects
-- [-] go live
+- [ ] connecting to the database
+- [ ] using HTMX to easily switch out contents in the HTML
+- [ ] TailwindCSS for looks
+- [ ] :momo:
+- [ ] maybe a little JS/web Components for little effects
+- [ ] go live
