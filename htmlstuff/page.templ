@@ -19,12 +19,19 @@ templ Page(title string, header string, message string, timesList []string) {
 			<div id="message-div">
 				<p>{ message }</p>
 			</div>
+			<button class="bg-green-400" hx-get="/listswap" hx-target="#times" hx-swap="outerHTML">
+				swap list
+			</button>
 			<div id="times" class="bg-yellow-300">
-				<ul>
-					for _, time := range timesList {
-						<li>{ time }</li>
-					}
-				</ul>
+				if len(timesList)==0 {
+					<p>No times to display</p>
+				} else {
+					<ul>
+						for _, time := range timesList {
+							<li>{ time }</li>
+						}
+					</ul>
+				}
 			</div>
 		</body>
 	</html>
