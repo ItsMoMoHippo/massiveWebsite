@@ -14,7 +14,8 @@ import (
 var DB *sql.DB
 
 func Init() {
-	err := godotenv.Load(filepath.Join("secrets", ".env"))
+	var err error
+	err = godotenv.Load(filepath.Join("secrets", ".env"))
 	if err != nil {
 		log.Fatalf("Error loading .env file: %v", err)
 	}
@@ -30,7 +31,7 @@ func Init() {
 		host, port, user, password, dbname,
 	)
 
-	DB, err := sql.Open("postgres", psqlInfo)
+	DB, err = sql.Open("postgres", psqlInfo)
 	if err != nil {
 		log.Fatalf("Failed to open database connection: %v", err)
 	}

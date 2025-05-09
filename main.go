@@ -11,9 +11,7 @@ import (
 
 // main function
 func main() {
-	homePage := htmlstuff.Page("MassiveAttackWeb", "MassiveAttack", "hello from templ")
-
-	http.Handle("/", templ.Handler(homePage))
+	http.Handle("/", templ.Handler(htmlstuff.Page("MassiveAttackWeb", "MassiveAttack", "hello from templ")))
 	http.Handle("/msgswap", templ.Handler(htmlstuff.Message("hello?")))
 
 	fmt.Println("Starting sevrer on :8080...")
