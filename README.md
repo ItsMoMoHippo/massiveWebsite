@@ -18,7 +18,7 @@ go mod tidy
 > [!IMPORTANT]
 > Missing these tools will result in compile-time errors
 
-### How to deploy
+### 🔨 How to run
 1. Generate Templ files (HTML to Go components):
 ```bash
 templ generate
@@ -38,9 +38,10 @@ templ generate
 > [!NOTE]
 > You can switch between PostgreSQL and SQLite easily for development vs. production — just change the DB config.
 
+> [!NOTE]
+> Use gofmt (or gofumpt) for consistent formatting
 
-
-### Progress
+### 📊 Progress
 - [x] static webpage
 - [x] Templ to inject information into a HTML page
 - [ ] connecting to the database
