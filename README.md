@@ -44,7 +44,7 @@ templ generate
 ### 📊 Progress
 - [x] static webpage
 - [x] Templ to inject information into a HTML page
-- [ ] connecting to the database
+- [x] connecting to the database
 - [x] using HTMX to easily switch out contents in the HTML
 - [x] TailwindCSS for looks
 - [ ] :momo:

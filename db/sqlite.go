@@ -2,27 +2,22 @@ package db
 
 import (
 	"database/sql"
-	"log"
-	"path/filepath"
+	"fmt"
 
 	_ "github.com/mattn/go-sqlite3"
 )
 
-var LDB *sql.DB
+const dbPath = "./secrets/test.db"
 
-func LInit() {
-	sqlitePath := filepath.Join("secrets", "test.db")
-
-	var err error
-	LDB, err = sql.Open("sqlite3", sqlitePath)
+func LInit() (*sql.DB, error) {
+	db, err := sql.Open("sqlite3", dbPath)
 	if err != nil {
-		log.Fatalf("Failed to open database connection: %v", err)
+		return nil, fmt.Errorf("failed to connect to database: %w", err)
 	}
 
-	err = LDB.Ping()
-	if err != nil {
-		log.Fatalf("Failed to ping database: %v", err)
+	if err := db.Ping(); err != nil {
+		return nil, fmt.Errorf("failed to ping database: %w", err)
 	}
 
-	log.Println("✅ Connected to database successfully.")
+	return db, nil
 }
