@@ -11,11 +11,8 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var DB *sql.DB
-
-func Init() {
-	var err error
-	err = godotenv.Load(filepath.Join("secrets", ".env"))
+func Init() (*sql.DB, error) {
+	err := godotenv.Load(filepath.Join("secrets", ".env"))
 	if err != nil {
 		log.Fatalf("Error loading .env file: %v", err)
 	}
@@ -31,15 +28,16 @@ func Init() {
 		host, port, user, password, dbname,
 	)
 
-	DB, err = sql.Open("postgres", psqlInfo)
+	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
 		log.Fatalf("Failed to open database connection: %v", err)
 	}
 
-	err = DB.Ping()
+	err = db.Ping()
 	if err != nil {
 		log.Fatalf("Failed to ping database: %v", err)
 	}
 
 	log.Println("✅ Connected to database successfully.")
+	return db, err
 }
