@@ -39,7 +39,7 @@ templ generate
 > You can switch between PostgreSQL and SQLite easily for development vs. production — just change the DB config.
 
 > [!NOTE]
-> Use gofmt (or gofumpt) for consistent formatting
+> Use [gofmt](https://go.dev/blog/gofmt) (or [gofumpt](https://github.com/mvdan/gofumpt)) for consistent formatting
 
 ### 📊 Progress
 - [x] static webpage
