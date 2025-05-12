@@ -25,16 +25,10 @@ templ Page(title string, header string, message string, timesList []string) {
 				</div>
 				<!-- right hand side -->
 				<div class="w-[30%]">
-					<button class="bg-green-400" hx-get="/listswap" hx-target="#times">
+					<button class="bg-green-400" hx-get="/tracktimes" hx-target="#times">
 						swap list
 					</button>
-					<div id="times" class="bg-yellow-300">
-						<ul>
-							for _, time := range timesList {
-								<li>{ time }</li>
-							}
-						</ul>
-					</div>
+					<div id="times" class="table-auto border border-r-gray-300 bg-yellow-300"></div>
 				</div>
 			</div>
 		</body>

@@ -32,6 +32,17 @@ func main() {
 		log.Fatal(err)
 	}
 
+	http.HandleFunc("/tracktimes", func(w http.ResponseWriter, r *http.Request) {
+		data, err := dbquery.GetTrackTimes(db)
+		if err != nil {
+			http.Error(w, "query error", 500)
+			return
+		}
+
+		w.Header().Set("Content-Type", "text/html")
+		htmlstuff.TrackTimesTable(data).Render(r.Context(), w)
+	})
+
 	fmt.Println("Starting sevrer on :8080...")
 	http.ListenAndServe(":8080", nil)
 }

@@ -1,0 +1,20 @@
+package htmlstuff
+
+import "maWeb/dbquery"
+
+templ TrackTimesTable(data []dbquery.TrackTime) {
+	<table class="table-auto border border-gray-300 w-full bg-white">
+		<thead>
+			<tr>
+				<th class="border px-2 py-1">Name</th>
+				<th class="border px-2 py-1">Time</th>
+			</tr>
+		</thead>
+		<tbody>
+			for _, row := range data {
+				<tr>{ row.Name }</tr>
+				<tr>{ row.Time }</tr>
+			}
+		</tbody>
+	</table>
+}
