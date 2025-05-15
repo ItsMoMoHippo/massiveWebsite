@@ -1,6 +1,6 @@
 package htmlstuff
 
-templ Page(title string, header string, message string, timesList []string) {
+templ Page(title string, header string, message string) {
 	<!DOCTYPE html>
 	<html lang="eng">
 		<head>
@@ -15,21 +15,9 @@ templ Page(title string, header string, message string, timesList []string) {
 			</header>
 			<div class="flex gap-4">
 				<!-- left hand side -->
-				<div class="w-[70%]">
-					<button class="bg-red-600" hx-get="/msgswap" hx-target="#message-div">
-						swap message
-					</button>
-					<div id="message-div">
-						<p>{ message }</p>
-					</div>
-				</div>
+				@LeftSide(message)
 				<!-- right hand side -->
-				<div class="w-[30%]">
-					<button class="bg-green-400" hx-get="/tracktimes" hx-target="#times">
-						swap list
-					</button>
-					<div id="times" class="table-auto border border-r-gray-300 bg-yellow-300"></div>
-				</div>
+				@RightSide()
 			</div>
 		</body>
 	</html>
