@@ -18,4 +18,4 @@ build:
 clean:
 	go clean
 
-.PHONY run generate clean build
+.PHONY: run generate clean build
