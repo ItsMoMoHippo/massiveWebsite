@@ -1,0 +1,33 @@
+package views
+
+import "maWeb/model"
+import "strconv"
+
+templ Table(data []model.TrackTime) {
+	<table class="table-auto border border-r-gray-300 bg-yellow-300">
+		@TableHead()
+		@TableContents(data)
+	</table>
+}
+
+templ TableHead() {
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Club</th>
+			<th>Time</th>
+		</tr>
+	</thead>
+}
+
+templ TableContents(data []model.TrackTime) {
+	<tbody id="table-content">
+		for _, row := range data {
+			<tr>
+				<th>{ row.Name }</th>
+				<th>{ strconv.Itoa(row.Club) }</th>
+				<th>{ row.Time }</th>
+			</tr>
+		}
+	</tbody>
+}

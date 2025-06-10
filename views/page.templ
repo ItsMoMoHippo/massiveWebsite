@@ -1,6 +1,8 @@
-package htmlstuff
+package views
 
-templ Page(title string, header string, message string) {
+import "maWeb/model"
+
+templ Page(title string, header string, data []model.TrackTime) {
 	<!DOCTYPE html>
 	<html lang="eng">
 		<head>
@@ -15,9 +17,9 @@ templ Page(title string, header string, message string) {
 			</header>
 			<div class="flex gap-4">
 				<!-- left hand side -->
-				@LeftSide(message)
+				@LeftSide()
 				<!-- right hand side -->
-				@RightSide()
+				@RightSide(data)
 			</div>
 		</body>
 	</html>

@@ -1,0 +1,12 @@
+package views
+
+import "maWeb/model"
+import "strconv"
+
+templ TableBody(data []model.TrackTime) {
+	for _, row := range data {
+		<th>{ row.Name }</th>
+		<th>{ strconv.Itoa(row.Club) }</th>
+		<th>{ row.Time }</th>
+	}
+}
