@@ -3,7 +3,7 @@ package views
 import "maWeb/model"
 import "strconv"
 
-templ Table(data []model.TrackTime) {
+templ Table(data *[]model.TrackTime) {
 	<table class="table-auto border border-r-gray-300 bg-yellow-300">
 		@TableHead()
 		@TableContents(data)
@@ -20,9 +20,9 @@ templ TableHead() {
 	</thead>
 }
 
-templ TableContents(data []model.TrackTime) {
+templ TableContents(data *[]model.TrackTime) {
 	<tbody id="table-content">
-		for _, row := range data {
+		for _, row := range *data {
 			<tr>
 				<th>{ row.Name }</th>
 				<th>{ strconv.Itoa(row.Club) }</th>

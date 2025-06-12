@@ -5,55 +5,60 @@ import (
 	"log"
 	"maWeb/db"
 	"maWeb/dbquery"
-	"maWeb/htmlstuff"
+	"maWeb/model"
+	"maWeb/util"
+	"maWeb/views"
 	"net/http"
 
 	"github.com/a-h/templ"
 )
 
-type Filter struct {
-	Name string
-}
+var cache *[]model.TrackTime
 
-var filter = Filter{Name: "Joe"}
-
-// MAIN FUNCTION
+// main function
 func main() {
+	// db startup
 	db, err := db.LInit()
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
 	defer db.Close()
 
-	http.Handle("/", templ.Handler(htmlstuff.Page("MassiveAttackWeb", "Massive Attack", "Hello from templ")))
-	http.Handle("/msgswap", templ.Handler(htmlstuff.Message("hello?")))
-	http.Handle("/listswap", templ.Handler(htmlstuff.ListSwap([]string{"00.03", "00.04"})))
-
+	// db tests
 	fmt.Println("pinging db...")
 	db.Ping()
 	fmt.Println("db ponged")
-
-	if err := dbquery.PrintAll(db); err != nil {
+	if err = dbquery.PrintStar(db); err != nil {
 		log.Fatal(err)
 	}
 
-	http.HandleFunc("/tracktimes", func(w http.ResponseWriter, r *http.Request) {
-		data, err := dbquery.GetTrackTimes(db)
-		if err != nil {
-			http.Error(w, "query error", 500)
-			return
-		}
+	// init cache
+	tempCache, err := dbquery.GetStar(db)
+	if err != nil {
+		log.Fatal(err)
+	}
+	cache = &tempCache
+	util.PrintCache(*cache)
 
-		w.Header().Set("Content-Type", "text/html")
-		htmlstuff.TrackTimesTable(data).Render(r.Context(), w)
-	})
-	http.HandleFunc("/changefilter", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("before is: ", filter.Name)
-		filter.Name = "Bob"
-		fmt.Println("Filter changed to:", filter.Name)
-		w.WriteHeader(http.StatusOK)
+	// refresh cache
+	// TODO: put in a go routine
+	refreshedCach, err := util.RefreshCache(db)
+	if err != nil {
+		log.Fatal(err)
+	}
+	cache = &refreshedCach
+
+	// handles
+	http.Handle("/", templ.Handler(views.Page("MassiveAttackWeb", "Massive Attack", cache)))
+
+	// TODO: do endpoint
+	// returns filtered times
+	http.HandleFunc("/filter", func(w http.ResponseWriter, r *http.Request) {
+		filtered := util.FilterCache(cache, 1)
+		templ.Handler(views.TableContents(filtered))
 	})
 
+	// start server
 	fmt.Println("starting server on :8080...")
 	http.ListenAndServe(":8080", nil)
 }

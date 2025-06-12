@@ -2,11 +2,8 @@ package views
 
 import "maWeb/model"
 
-templ RightSide(data []model.TrackTime) {
+templ RightSide(data *[]model.TrackTime) {
 	<div class="w-[30%]">
-		<button class="bg-green-400" hx-get="/tracktimes" hx-target="#times">
-			show list
-		</button>
 		@FilterForm()
 		@Table(data)
 	</div>
