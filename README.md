@@ -47,6 +47,5 @@ templ generate
 - [x] connecting to the database
 - [x] using HTMX to easily switch out contents in the HTML
 - [x] TailwindCSS for looks
-- [ ] :momo:
 - [ ] maybe a little JS/web Components for little effects
 - [ ] go live

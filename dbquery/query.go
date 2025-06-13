@@ -52,5 +52,6 @@ func PrintStar(db *sql.DB) error {
 	for _, item := range data {
 		fmt.Printf("%s\t%d\t%s\n", item.Name, item.Club, item.Time)
 	}
+	println()
 	return nil
 }

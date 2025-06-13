@@ -8,10 +8,11 @@ import (
 )
 
 func PrintCache(cache []model.TrackTime) {
-	println("name\tclub\ttime\n")
+	println("name\tclub\ttime")
 	for _, unit := range cache {
 		fmt.Printf("%s\t%d\t%s\n", unit.Name, unit.Club, unit.Time)
 	}
+	println()
 }
 
 func FilterCache(cache *[]model.TrackTime, clubID int) *[]model.TrackTime {

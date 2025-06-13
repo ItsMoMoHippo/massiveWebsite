@@ -9,6 +9,7 @@ import (
 	"maWeb/util"
 	"maWeb/views"
 	"net/http"
+	"strconv"
 
 	"github.com/a-h/templ"
 )
@@ -54,8 +55,34 @@ func main() {
 	// TODO: do endpoint
 	// returns filtered times
 	http.HandleFunc("/filter", func(w http.ResponseWriter, r *http.Request) {
-		filtered := util.FilterCache(cache, 1)
-		templ.Handler(views.TableContents(filtered))
+		if r.Method != "POST" {
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+			fmt.Println("error")
+			return
+		}
+		fmt.Println("data stage 1 accepted")
+
+		clubIDstr := r.FormValue("club_id")
+		if clubIDstr == "" {
+			http.Error(w, "Missing club_id", http.StatusBadRequest)
+			fmt.Println("missing club_id")
+			return
+		}
+		fmt.Println("data satge 2 accepted")
+
+		clubID, err := strconv.Atoi(clubIDstr)
+		if err != nil {
+			http.Error(w, "Invalid Club Id", http.StatusBadRequest)
+			fmt.Println("data was not a number")
+			return
+		}
+		fmt.Println("data stage 3 accepted")
+
+		filtered := util.FilterCache(cache, clubID)
+		util.PrintCache(*filtered)
+		fmt.Println("making data")
+		templ.Handler(views.TableContents(filtered)).ServeHTTP(w, r)
+		fmt.Println("sending data")
 	})
 
 	// start server
