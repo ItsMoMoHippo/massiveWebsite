@@ -21,16 +21,28 @@ go mod tidy
 ### 🔨 How to run
 1. Generate Templ files (HTML to Go components):
 ```bash
+make generate
+```
+or 
+```bash
 templ generate
 ```
 
 2. Run the project
  - To build and run seperately:
+```bash
+make build
+``` 
+or
  ```bash
  go build .
  ./main.exe
  ```
  - Or to run in one step:
+```bash
+make run
+```
+or
  ```bash
  go run .
  ```
