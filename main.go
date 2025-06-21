@@ -85,6 +85,17 @@ func main() {
 		fmt.Println("sending data")
 	})
 
+	http.HandleFunc("/resetFilter", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != "POST" {
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+			fmt.Println("error")
+			return
+		}
+
+		templ.Handler(views.TableContents(cache)).ServeHTTP(w, r)
+		fmt.Println("reset table content")
+	})
+
 	// start server
 	fmt.Println("starting server on :8080...")
 	http.ListenAndServe(":8080", nil)

@@ -6,7 +6,9 @@ import "strconv"
 templ Table(data *[]model.TrackTime) {
 	<table class="table-auto border border-r-gray-300 bg-yellow-300">
 		@TableHead()
-		@TableContents(data)
+		<tbody id="table-content">
+			@TableContents(data)
+		</tbody>
 	</table>
 }
 
@@ -21,13 +23,11 @@ templ TableHead() {
 }
 
 templ TableContents(data *[]model.TrackTime) {
-	<tbody id="table-content">
-		for _, row := range *data {
-			<tr>
-				<th>{ row.Name }</th>
-				<th>{ strconv.Itoa(row.Club) }</th>
-				<th>{ row.Time }</th>
-			</tr>
-		}
-	</tbody>
+	for _, row := range *data {
+		<tr>
+			<th>{ row.Name }</th>
+			<th>{ strconv.Itoa(row.Club) }</th>
+			<th>{ row.Time }</th>
+		</tr>
+	}
 }

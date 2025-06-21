@@ -1,17 +1,42 @@
 package views
 
 templ FilterForm() {
-	<form id="timeFilter" class="space-y-6">
+	<form id="timeFilter" class="space-y-4">
 		<div class="flex flex-wrap gap-3">
+			<button
+				hx-post="/resetFilter"
+				hx-target="#table-content"
+				type="button"
+				class="bg-neutral-800 hover:bg-neutral-900 text-white px-5 py-2 rounded-md transition-colors duration-200"
+			>
+				reset filter
+			</button>
 			<button
 				hx-post="/filter"
 				hx-vals='{"club_id":1}'
-				type="button"
-				class="bg-cyan-400 hover:bg-cyan-500 text-white px-6 py-2 rounded-md transition-colors duration-200"
 				hx-target="#table-content"
-				hx-swap="outerHTML"
+				type="button"
+				class="bg-cyan-400 hover:bg-cyan-500 text-white px-5 py-2 rounded-md transition-colors duration-200"
 			>
 				club 1
+			</button>
+			<button
+				hx-post="/filter"
+				hx-vals='{"club_id":2}'
+				hx-target="#table-content"
+				type="button"
+				class="bg-red-400 hover:bg-red-500 text-white px-5 py-2 rounded-md transition-colors duration-200"
+			>
+				club 2
+			</button>
+			<button
+				hx-post="/filter"
+				hx-vals='{"club_id":3}'
+				hx-target="#table-content"
+				type="button"
+				class="bg-yellow-400 hover:bg-yellow-500 text-white px-5 py-2 rounded-md transition-colors duration-200"
+			>
+				club 3
 			</button>
 		</div>
 	</form>
